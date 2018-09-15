@@ -8,7 +8,7 @@ using Online_Shop.Models;
 
 namespace Online_Shop.Controllers
 {
-    public class HomeController : Controller
+    public class IndexController : Controller
     {
         public IActionResult Index()
         {
