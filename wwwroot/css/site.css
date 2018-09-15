@@ -6,6 +6,14 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.ps {
+    overflow: hidden !important;
+    overflow-anchor: none;
+    -ms-overflow-style: none;
+    touch-action: auto;
+    -ms-touch-action: auto;
+}
+
 .wrapper {
     position: relative;
     top: 0;
@@ -27,6 +35,97 @@ body {
     margin-top: 80px;
     margin-left: 20px;
     border-radius: 5px;
+}
+
+.sidebar .sidebar-wrapper {
+    width: 100%;
+    min-height: 100%;
+    max-height: calc(100vh - 705px);
+    z-index: 4;
+    position: relative;
+    overflow: auto;
+}
+
+.sidebar .nav li:first-child>a {
+    margin: 0 15px;
+}
+
+.sidebar .logo {
+    position: relative;
+    padding: 0.5rem 0.7rem;
+    z-index: 4;
+}
+
+.sidebar .logo a.logo-mini {
+    opacity: 1;
+    float: left;
+    width: 34px;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 12px;
+}
+
+.sidebar .logo a.logo-normal {
+    display: block;
+    opacity: 1;
+    -webkit-transform: translate3d(0px, 0, 0);
+    -moz-transform: translate3d(0px, 0, 0);
+    -o-transform: translate3d(0px, 0, 0);
+    -ms-transform: translate3d(0px, 0, 0);
+    transform: translate3d(0px, 0, 0);
+}
+
+.sidebar .logo:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+    height: 1px;
+    width: calc(100% - 30px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar .nav li.active>a:before {
+    content: " ";
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    top: 22px;
+    left: -4px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.sidebar .nav li>a, .off-canvas-sidebar .nav li>a {
+    margin: 10px 15px 0;
+    border-radius: 30px;
+    color: #FFFFFF;
+    display: block;
+    text-decoration: none;
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 0.7142em;
+    padding: 10px 8px;
+    line-height: 1.625rem;
+}
+
+.sidebar .nav p, .off-canvas-sidebar .nav p {
+    margin: 0;
+    line-height: 30px;
+    position: relative;
+    display: block;
+    height: auto;
+    white-space: nowrap;
+}
+
+.sidebar .nav li.active>a i, .sidebar .nav li.active>a p {
+    color: #FFFFFF;
+}
+
+.sidebar .nav {
+    margin-top: 20px;
+    display: block;
 }
 
 .main-panel {
@@ -119,4 +218,8 @@ body {
     transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+ul li, ol li {
+    color: #FFFFFF;
 }

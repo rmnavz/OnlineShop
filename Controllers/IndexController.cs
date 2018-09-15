@@ -15,10 +15,12 @@ namespace Online_Shop.Controllers
         protected DatabaseContext Db;
 
         #endregion
+        
         public IndexController(DatabaseContext DbContext)
         {
             Db = DbContext;
         }
+
         public IActionResult Index()
         {
             return View();
