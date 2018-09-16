@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace Online_Shop
 {
@@ -19,7 +20,6 @@ namespace Online_Shop
 
         public IConfiguration Configuration { get; }
         public IHostingEnvironment Environment { get; }
-        protected string ConnectionString;
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -29,25 +29,17 @@ namespace Online_Shop
             });
 
             #region GetConnectionString
-
-                if(Environment.IsDevelopment())
-                {
-                    ConnectionString = Configuration.GetConnectionString("DevelopmentConnection");
+                // Add ApplicationDbContext to DI
+                if(Environment.IsProduction()){
+                    services.AddDbContext<DatabaseContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
                 }
-                else if(Environment.IsProduction())
-                {
-                    ConnectionString = Configuration.GetConnectionString("ProductionConnection");
-                }
-                else
-                {
-                    ConnectionString = Configuration.GetConnectionString("DefaultConnection");
+                else if(Environment.IsDevelopment()){
+                    services.AddDbContext<DatabaseContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection")));
                 }
                 
             #endregion
-
-            // Add ApplicationDbContext to DI
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(ConnectionString));
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
@@ -83,7 +75,7 @@ namespace Online_Shop
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Index}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

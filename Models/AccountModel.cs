@@ -18,10 +18,5 @@ namespace Online_Shop.Models
         {
             return (string.IsNullOrEmpty(this.Nickname)) ? this.FirstName + ' ' + this.LastName : this.Nickname ;
         }
-
-        public string getRole()
-        {
-            return this.Role.Name;
-        }
     }
 }

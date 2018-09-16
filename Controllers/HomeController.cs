@@ -8,7 +8,7 @@ using Online_Shop.Models;
 
 namespace Online_Shop.Controllers
 {
-    public class IndexController : Controller
+    public class HomeController : Controller
     {
         #region Protected Members
 
@@ -16,13 +16,18 @@ namespace Online_Shop.Controllers
 
         #endregion
         
-        public IndexController(DatabaseContext DbContext)
+        public HomeController(DatabaseContext DbContext)
         {
             Db = DbContext;
+            DbContext.Database.EnsureCreated();
         }
 
         public IActionResult Index()
         {
+            if(User.Identity.IsAuthenticated)
+            {
+                
+            }
             return View();
         }
 

@@ -1,0 +1,43 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="row d-flex justify-content-center">
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Login</h4>
+            </div>
+            <div class="card-body">
+                <form asp-action="Login" method="POST">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input asp-for="EmailAddress" class="form-control" />
+                                <span asp-validation-for="EmailAddress"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Passwoord</label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-block" value="submit"/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

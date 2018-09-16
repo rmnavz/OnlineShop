@@ -11,4 +11,19 @@ namespace Online_Shop.ViewModels
         [DataType (DataType.Password)]
         public string Password { get; set; }
     }
+
+    public class RegisterViewModel
+    {
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
+        public string Nickname { get; set; }
+        [Required]
+        [DataType (DataType.EmailAddress)]
+        public string EmailAddress { get; set; }
+        [Required]
+        [DataType (DataType.Password)]
+        public string Password { get; set; }
+    }
 }

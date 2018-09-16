@@ -277,6 +277,11 @@ body {
     box-shadow: none;
 }
 
+.input-group, .form-group {
+    margin-bottom: 10px;
+    position: relative;
+}
+
 ul li, ol li {
     color: #FFFFFF;
 }
