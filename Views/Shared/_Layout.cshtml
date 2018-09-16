@@ -58,18 +58,30 @@
                             </div>
                             <li class="dropdown nav-item">
                                 <a href="#" class="nav-link" data-toggle="dropdown"><i class="fas fa-user"></i></a>
-                                <ul class="dropdown-menu dropdown-navbar">
-                                    <li class="nav-link">
-                                        <a href="#" class="nav-item dropdown-item">Profile</a>
-                                    </li>
-                                    <li class="nav-link">
-                                        <a href="#" class="nav-item dropdown-item">Settings</a>
-                                    </li>
-                                    <div class="dropdown-divider"></div>
-                                    <li class="nav-link">
-                                        <a href="#" class="nav-item dropdown-item">Log out</a>
-                                    </li>
-                                </ul>
+                                @if(User.Identity.isAuthenticated) {
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        <li class="nav-link">
+                                            <a href="#" class="nav-item dropdown-item">Profile</a>
+                                        </li>
+                                        <li class="nav-link">
+                                            <a href="#" class="nav-item dropdown-item">Settings</a>
+                                        </li>
+                                        <div class="dropdown-divider"></div>
+                                        <li class="nav-link">
+                                            <a href="#" class="nav-item dropdown-item">Log out</a>
+                                        </li>
+                                    </ul>
+                                }
+                                else{
+                                    <ul class="dropdown-menu dropdown-navbar">
+                                        <li class="nav-link">
+                                            <a href="#" class="nav-item dropdown-item">Login</a>
+                                        </li>
+                                        <li class="nav-link">
+                                            <a href="#" class="nav-item dropdown-item">Register</a>
+                                        </li>
+                                    </ul>
+                                }
                             </li>
                             <li class="separator d-lg-none"></li>
                         </ul>

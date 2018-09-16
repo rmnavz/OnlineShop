@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Online_Shop.Models;
 
 namespace Online_Shop
 {
@@ -18,7 +19,8 @@ namespace Online_Shop
         #endregion
 
         #region Public Properties
-            
+            public DbSet<AccountModel> Accounts { get; set; }
+            public DbSet<RoleModel> Roles { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,7 +28,9 @@ namespace Online_Shop
             base.OnModelCreating(modelBuilder);
 
             // Fluent API
-
+            modelBuilder.Entity<AccountModel>()
+                .HasOne(a => a.Role)
+                .WithMany(r => r.Accounts);
 
         }
     }

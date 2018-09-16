@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,10 @@ namespace Online_Shop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc(options =>{
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute{});
+            });
+
             #region GetConnectionString
 
                 if(Environment.IsDevelopment())
@@ -44,7 +49,17 @@ namespace Online_Shop
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(ConnectionString));
 
-            services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => {
+                    options.AccessDeniedPath = "";
+                    options.LoginPath = "/Account/Login/";
+                    options.LogoutPath = "/Account/Logout/";
+                });
+
+            services.AddAuthorization(options =>{
+                options.AddPolicy("Admin", p => p.RequireAuthenticatedUser().RequireRole("Admin"));
+                options.AddPolicy("Member", p => p.RequireAuthenticatedUser().RequireRole("Member"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +76,8 @@ namespace Online_Shop
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

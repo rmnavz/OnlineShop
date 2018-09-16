@@ -1,6 +1,6 @@
 body {
     background: #37374F;
-    color: #AB92C1;
+    color: #F499E3;
     font-family: "Poppins";
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -75,6 +75,19 @@ body {
     transform: translate3d(0px, 0, 0);
 }
 
+.sidebar .logo .simple-text {
+    text-transform: uppercase;
+    padding: 0.5rem 0;
+    display: block;
+    white-space: nowrap;
+    font-size: 1em;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 400;
+    line-height: 30px;
+    overflow: hidden;
+}
+
 .sidebar .logo:after {
     content: '';
     position: absolute;
@@ -121,6 +134,17 @@ body {
 
 .sidebar .nav li.active>a i, .sidebar .nav li.active>a p {
     color: #FFFFFF;
+}
+
+.sidebar .nav i {
+    font-size: 20px;
+    float: left;
+    margin-right: 12px;
+    line-height: 30px;
+    width: 34px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    position: relative;
 }
 
 .sidebar .nav {
@@ -202,6 +226,39 @@ body {
 .main-panel .content {
     padding: 80px 30px 30px 280px;
     min-height: calc(100vh - 70px);
+}
+
+.card {
+    background: #27293d;
+    border: 0;
+    border-radius: 0.2857rem;
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    box-shadow: 0 1px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.card .card-header:not([data-background-color]) {
+    background-color: transparent;
+}
+
+.card .card-header {
+    padding: 15px 15px 0;
+    border: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card .card-header .card-title {
+    color: #FFFFFF;
+    font-weight: 100;
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6, .card p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.card .card-body {
+    padding: 15px;
 }
 
 .form-control {
