@@ -79,7 +79,7 @@ namespace Online_Shop.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index","Index");
+            return RedirectToAction("Index","Home");
         }
     }
 }
