@@ -20,17 +20,20 @@ namespace Online_Shop
 
         #region Public Properties
             public DbSet<AccountModel> Accounts { get; set; }
-            public DbSet<RoleModel> Roles { get; set; }
+            public DbSet<SellerModel> Sellers { get; set; }
+            public DbSet<CustomerModel> Customers { get; set; }
+            
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Fluent API
-            modelBuilder.Entity<AccountModel>()
-                .HasOne(a => a.Role)
-                .WithMany(r => r.Accounts);
+            #region Fluent API
+
+            
+                
+            #endregion
 
         }
     }
