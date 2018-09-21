@@ -91,7 +91,8 @@ namespace Online_Shop
                 modelBuilder.Entity<VariantModel>()
                     .HasMany<ImageModel>(v => v.Images)
                     .WithOne(i => i.Variant)
-                    .HasForeignKey(i => i.VariantID);
+                    .HasForeignKey(i => i.VariantID)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 modelBuilder.Entity<VariantModel>()
                     .HasMany<OrderModel>(v => v.Orders)
