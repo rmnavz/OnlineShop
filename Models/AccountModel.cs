@@ -33,8 +33,10 @@ namespace Online_Shop.Models
         [Key] 
         public int ID { get; set; }
 
+        public int AccountID { get; set; }
         public AccountModel Account { get; set; }
-        public ICollection<StoreModel> Stores { get; set; }
+
+        public ICollection<StoreSellerModel> StoreSeller { get; set; }
     }
 
     public class CustomerModel
@@ -42,7 +44,10 @@ namespace Online_Shop.Models
         [Key]
         public int ID { get; set; }
 
+        public int AccountID { get; set; }
         public AccountModel Account { get; set; }
+
+        public ICollection<CartModel> Carts { get; set; }
     }
 
     #region Enum

@@ -24,6 +24,11 @@ namespace Online_Shop.Controllers
             Db = DbContext;
         }
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Login() => View();
 
         [HttpPost]
@@ -37,7 +42,8 @@ namespace Online_Shop.Controllers
 
             var identity = new ClaimsIdentity(new[] {
                 new Claim(ClaimTypes.Name, result.getName()),
-                new Claim(ClaimTypes.Email, result.EmailAddress)
+                new Claim(ClaimTypes.Email, result.EmailAddress),
+                new Claim(ClaimTypes.Role, result.Role.ToString())
             }, CookieAuthenticationDefaults.AuthenticationScheme);
 
             var principal = new ClaimsPrincipal(identity);
@@ -60,14 +66,17 @@ namespace Online_Shop.Controllers
 
             if(result != null){ return View(model); }
 
-            AccountModel Account = new AccountModel();
-
-            Account.FirstName = model.FirstName;
-            Account.LastName = model.LastName;
-            Account.Nickname = model.Nickname;
-            Account.EmailAddress = model.EmailAddress;
-            Account.Password = PasswordSecurity.CreateHash(model.Password);
-            Account.DateCreated = DateTime.Now;
+            AccountModel Account = new AccountModel()
+            {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Nickname = model.Nickname,
+                EmailAddress = model.EmailAddress,
+                Password = PasswordSecurity.CreateHash(model.Password),
+                Role = AccountRoles.Customer,
+                Status = AccountStatus.Enabled,
+                DateCreated = DateTime.Now
+            };
 
             await Db.Accounts.AddAsync(Account);
             await Db.SaveChangesAsync();

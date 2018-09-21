@@ -24,10 +24,6 @@ namespace Online_Shop.Controllers
 
         public IActionResult Index()
         {
-            if(User.Identity.IsAuthenticated)
-            {
-                
-            }
             return View();
         }
 

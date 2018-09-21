@@ -12,18 +12,23 @@ namespace Online_Shop.Models
         public DateTime DateUpdated { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public int CustomerID { get; set; }
+        public CustomerModel Customer { get; set; }
+
         public ICollection<OrderModel> Orders { get; set; }
     }
 
     public class OrderModel
     {
         [Key]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public int Quantity { get; set; }
         public OrderStatus Status { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public int VariantID { get; set; }
         public VariantModel Variant { get; set; }
+        public Guid CartID { get; set; }
         public CartModel Cart { get; set; }
     }
 

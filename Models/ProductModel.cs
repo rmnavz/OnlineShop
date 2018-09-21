@@ -14,7 +14,9 @@ namespace Online_Shop.Models
         public DateTime DateCreated { get; set; }
         public ProductStatus Status { get; set; }
 
+        public int StoreID { get; set; }
         public StoreModel Store { get; set; }
+
         public ICollection<ImageModel> Images { get; set; }
         public ICollection<VariantModel> Variants { get; set; }
     }
@@ -30,18 +32,32 @@ namespace Online_Shop.Models
         public CultureInfo Currency { get; set; }
         public DateTime DateCreated { get; set; }
 
+        public int ProductID { get; set; }
         public ProductModel Product { get; set; }
-        public ImageModel Image { get; set; }
+
+        public ICollection<ImageModel> Images { get; set; }
+        public ICollection<OrderModel> Orders { get; set; }
+
+        public string TwoLetterISOLanguageName
+        {
+            get { return Currency == null ? null : Currency.TwoLetterISOLanguageName; }
+            set { Currency = CultureInfo.GetCultureInfo(value); }
+        }
     }
 
     public class ImageModel
     {
         [Key] 
         public int ID { get; set; }
-        public string ImageName { get; set; }
-        public string ImageDescription { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public byte[] Image { get; set; }
         public DateTime DateCreated { get; set; }
+
+        public int ProductID { get; set; }
+        public ProductModel Product { get; set; }
+        public int VariantID { get; set; }
+        public VariantModel Variant { get; set; }
     }
 
     #region enum

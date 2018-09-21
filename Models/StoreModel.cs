@@ -12,6 +12,15 @@ namespace Online_Shop.Models
         public string Description { get; set; }
 
         public ICollection<ProductModel> Products { get; set; }
-        public ICollection<SellerModel> Sellers { get; set; }
+        public ICollection<StoreSellerModel> StoreSeller { get; set; }
+    }
+
+    public class StoreSellerModel
+    {
+        public int StoreID { get; set; }
+        public StoreModel Store { get; set; }
+        
+        public int SellerID { get; set; }
+        public SellerModel Seller { get; set; }
     }
 }

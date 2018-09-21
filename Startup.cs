@@ -49,8 +49,11 @@ namespace Online_Shop
                 });
 
             services.AddAuthorization(options =>{
-                options.AddPolicy("Admin", p => p.RequireAuthenticatedUser().RequireRole("Admin"));
-                options.AddPolicy("Member", p => p.RequireAuthenticatedUser().RequireRole("Member"));
+                options.AddPolicy("SA", p => p.RequireAuthenticatedUser().RequireRole("SuperAdministrator"));
+                options.AddPolicy("A", p => p.RequireAuthenticatedUser().RequireRole("Administrator"));
+                options.AddPolicy("S", p => p.RequireAuthenticatedUser().RequireRole("Seller"));
+                options.AddPolicy("C", p => p.RequireAuthenticatedUser().RequireRole("Customer"));
+                options.AddPolicy("G", p => p.RequireAuthenticatedUser().RequireRole("Guests"));
             });
         }
 
