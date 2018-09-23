@@ -67,7 +67,7 @@ namespace Online_Shop
             }
             else
             {
-                app.UseExceptionHandler("/Index/Error");
+                app.UseExceptionHandler("/Home/Error");
             }
 
             app.UseStaticFiles();

@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Online_Shop.Models;
 
 namespace Online_Shop.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
-        #region Protected Members
-
-        protected DatabaseContext Db;
-
-        #endregion
-        
-        public HomeController(DatabaseContext DbContext)
+        public HomeController(DatabaseContext DbContext) : base(DbContext)
         {
-            Db = DbContext;
-            DbContext.Database.EnsureCreated();
         }
 
         public IActionResult Index()

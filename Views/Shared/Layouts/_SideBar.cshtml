@@ -1,0 +1,46 @@
+<div class="sidebar">
+    <div class="sidebar-wrapper ps">
+        <div class="logo">
+            <a asp-action="Index" asp-controller="Home" class="simple-text logo-mini">EC</a>
+            <a asp-action="Index" asp-controller="Home" class="simple-text logo-normal">E-Commerce</a>
+        </div>
+        <ul class="nav">
+            <li class="active ">
+                <a asp-action="Index" asp-controller="Home" ><i class="fas fa-home"></i><p>Home</p></a>
+            </li>
+        </ul>
+        @if(User.IsInRole(AccountRoles.Seller.ToString())) {
+            <ul class="nav">
+                <li class="active ">
+                    <a asp-controller="Store" ><i class="fas fa-store"></i><p>Store</p></a>
+                </li>
+            </ul>
+        }
+        else if(User.IsInRole(AccountRoles.Customer.ToString()))
+        {
+            <ul class="nav">
+                <li class="active ">
+                    <a asp-controller="Store" ><i class="fas fa-store"></i><p>Stores</p></a>
+                </li>
+            </ul>
+            <ul class="nav">
+                <li class="active ">
+                    <a asp-controller="Products" ><i class="fas fa-box-open"></i><p>Products</p></a>
+                </li>
+            </ul>
+        }
+        else
+        {
+            <ul class="nav">
+                <li class="active ">
+                    <a asp-controller="Store" ><i class="fas fa-store"></i><p>Stores</p></a>
+                </li>
+            </ul>
+            <ul class="nav">
+                <li class="active ">
+                    <a asp-controller="Products" ><i class="fas fa-box-open"></i><p>Products</p></a>
+                </li>
+            </ul>
+        }
+    </div>
+</div>

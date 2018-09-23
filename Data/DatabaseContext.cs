@@ -27,6 +27,7 @@ namespace Online_Shop
             public DbSet<StoreSellerModel> StoreSellers { get; set; }
             public DbSet<ProductModel> Products { get; set; }
             public DbSet<VariantModel> Variants { get; set; }
+            public DbSet<CategoryModel> Categories { get; set; }
 
             
             public DbSet<CartModel> Carts { get; set; }
@@ -76,23 +77,39 @@ namespace Online_Shop
                     .WithOne(s => s.Store)
                     .HasForeignKey(p => p.StoreID);
 
+                modelBuilder.Entity<StoreModel>()
+                    .HasOne(s => s.Image)
+                    .WithOne(i => i.Store)
+                    .HasForeignKey<StoreModel>(s => s.ImageID);
+
                 //Products
                 modelBuilder.Entity<ProductModel>()
-                    .HasMany<ImageModel>(v => v.Images)
-                    .WithOne(i => i.Product)
-                    .HasForeignKey(i => i.ProductID);
+                    .HasMany<ImageModel>(p => p.Images)
+                    .WithOne(i => i.Product);
 
                 modelBuilder.Entity<ProductModel>()
-                    .HasMany<VariantModel>(v => v.Variants)
+                    .HasMany<VariantModel>(p => p.Variants)
                     .WithOne(v => v.Product)
                     .HasForeignKey(v => v.ProductID);
+
+                //Producttore and Seller Relationship
+                modelBuilder.Entity<ProductCategoryModel>()
+                    .HasKey(pc => new { pc.ProductID , pc.CategoryID });
+
+                modelBuilder.Entity<ProductCategoryModel>()
+                    .HasOne<ProductModel>(pc => pc.Product)
+                    .WithMany(p => p.ProductCategory)
+                    .HasForeignKey(pc => pc.ProductID);
+
+                modelBuilder.Entity<ProductCategoryModel>()
+                    .HasOne<CategoryModel>(pc => pc.Category)
+                    .WithMany(c => c.ProductCategory)
+                    .HasForeignKey(pc => pc.CategoryID);
 
                 //Variants
                 modelBuilder.Entity<VariantModel>()
                     .HasMany<ImageModel>(v => v.Images)
-                    .WithOne(i => i.Variant)
-                    .HasForeignKey(i => i.VariantID)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .WithOne(i => i.Variant);
 
                 modelBuilder.Entity<VariantModel>()
                     .HasMany<OrderModel>(v => v.Orders)
@@ -125,10 +142,7 @@ namespace Online_Shop
                 //Orders
                 modelBuilder.Entity<OrderModel>()
                     .HasIndex(i => i.ID).IsUnique();
-
-                
-
-                
+                    
             #endregion
 
         }

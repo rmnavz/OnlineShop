@@ -1,0 +1,9 @@
+@model ICollection<StoreModel>
+<a class="btn btn-primary" asp-controller="Store" asp-action="Create">Create new store</a>
+
+<div class="row">
+    @foreach( var store in Model)
+    {
+        <partial name="Partials/StorePartial", for="@store" />
+    }
+</div>

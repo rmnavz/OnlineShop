@@ -23,9 +23,18 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label>Passwoord</label>
+                                <label>Password</label>
                                 <input asp-for="Password" class="form-control" />
                                 <span asp-validation-for="Password"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input asp-for="isRemembered" class="pull-center" />
+                                <label>Remember me?</label>
+                                <span asp-validation-for="isRemembered"></span>
                             </div>
                         </div>
                     </div>

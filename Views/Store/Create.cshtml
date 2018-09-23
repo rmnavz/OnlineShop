@@ -1,0 +1,45 @@
+@model CreateStoreViewModel
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Create new store</h4>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Store" asp-action="Create" method="POST" class="" role="form">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-default btn-block" value="Return" asp-controller="Store"  asp-action="List" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-block" value="Create" />                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

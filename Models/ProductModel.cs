@@ -11,6 +11,7 @@ namespace Online_Shop.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime DateUpdated { get; set; }
         public DateTime DateCreated { get; set; }
         public ProductStatus Status { get; set; }
 
@@ -19,6 +20,8 @@ namespace Online_Shop.Models
 
         public ICollection<ImageModel> Images { get; set; }
         public ICollection<VariantModel> Variants { get; set; }
+        
+        public ICollection<ProductCategoryModel> ProductCategory { get; set; }
     }
 
     public class VariantModel
@@ -45,19 +48,21 @@ namespace Online_Shop.Models
         }
     }
 
-    public class ImageModel
+    public class CategoryModel
     {
-        [Key] 
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public byte[] Image { get; set; }
+        public string Definition { get; set; }
+        public ICollection<ProductCategoryModel> ProductCategory { get; set; }
         public DateTime DateCreated { get; set; }
+    }
 
+    public class ProductCategoryModel
+    {
         public int ProductID { get; set; }
         public ProductModel Product { get; set; }
-        public int VariantID { get; set; }
-        public VariantModel Variant { get; set; }
+        public int CategoryID { get; set; }
+        public CategoryModel Category { get; set; }
     }
 
     #region enum

@@ -10,6 +10,8 @@ namespace Online_Shop.ViewModels
         [Required]
         [DataType (DataType.Password)]
         public string Password { get; set; }
+        
+        public bool isRemembered { get; set; }
     }
 
     public class RegisterViewModel

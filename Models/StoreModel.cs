@@ -10,6 +10,11 @@ namespace Online_Shop.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public DateTime DateUpdated { get; set; }
+        public DateTime DateCreated { get; set; }
+
+        public int ImageID { get; set; }
+        public ImageModel Image { get; set; }
 
         public ICollection<ProductModel> Products { get; set; }
         public ICollection<StoreSellerModel> StoreSeller { get; set; }

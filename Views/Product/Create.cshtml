@@ -1,0 +1,70 @@
+@model CreateProductViewModel
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Create new product</h4>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Product" asp-action="Create" method="POST" enctype="multipart/form-data" role="form">
+                    @Html.HiddenFor(m => m.StoreID)
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Product Images</label>
+                                <input asp-for="Images" class="form-control" />
+                                <span asp-validation-for="Images"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row CreateVariantPlaceHolder">
+                        <div class="col-12">
+                            <a class="btn btn-default btn-block" onclick="btnAddVariant(0)" >Add variant</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-default btn-block" value="Return" asp-controller="Product"  asp-action="List" asp-route-storeID="@Model.StoreID" />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-block" value="Create" />                                
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function btnAddVariant(ID)
+        {
+            $.get("@Url.Action("Create","Variant")" + '/' + ID, function(data) {
+                $(".CreateVariantPlaceHolder").replaceWith(data);
+            });
+        }
+    </script>
+}
