@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Online_Shop.Models;
@@ -10,30 +11,56 @@ namespace Online_Shop.Controllers
         {
         }
 
-        [HttpGet]
+        [Route("Search")]
         public IActionResult Index(string searchstring)
         {
             char[] separators  = {' ',',','/'};
-            string[] keywords;
+            var keywords = new List<string>();
+            var SearchData = new List<SearchModel>();
+
+            keywords.Add(searchstring);
 
             foreach(char separator in separators)
             {
-                keywords = searchstring.Split(separator);
+                keywords.AddRange(searchstring.Split(separator));
             }
 
-            var SearchData = new SearchModel()
+            foreach(string keyword in keywords)
             {
-                Products = Db.Products.Where(p => 
-                    p.Name.Contains(searchstring) ||
-                    p.Description.Contains(searchstring)
-                    ).ToList(),
-                Stores = Db.Stores.Where(s =>
-                    s.Name.Contains(searchstring) ||
-                    s.Description.Contains(searchstring)
-                    ).ToList()
-            };
+                foreach(ProductModel product in Db.Products.Where(p => p.Name.Contains(keyword)).ToList())
+                {
+                    if(SearchData.Where(s => s.Product.ID == product.ID).ToList().Count == 0)
+                    {
+                        SearchData.Add(new SearchModel(){ Product = product});
+                    }
+                }
 
-            return PartialView();
+                foreach(ProductModel product in Db.Products.Where(p => p.Description.Contains(keyword)).ToList())
+                {
+                    if(SearchData.Where(s => s.Product.ID == product.ID).ToList().Count == 0)
+                    {
+                        SearchData.Add(new SearchModel(){ Product = product});
+                    }
+                }
+
+                foreach(StoreModel store in Db.Stores.Where(s => s.Name.Contains(keyword)).ToList())
+                {
+                    if(SearchData.Where(s => s.Store.ID == store.ID).ToList().Count == 0)
+                    {
+                        SearchData.Add(new SearchModel(){ Store = store});
+                    }
+                }
+
+                foreach(StoreModel store in Db.Stores.Where(s => s.Description.Contains(keyword)).ToList())
+                {
+                    if(SearchData.Where(s => s.Store.ID == store.ID).ToList().Count == 0)
+                    {
+                        SearchData.Add(new SearchModel(){ Store = store});
+                    }
+                }
+            }
+
+            return PartialView(SearchData);
         }
     }
 }

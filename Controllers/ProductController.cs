@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Online_Shop.Models;
 using Online_Shop.ViewModels;
+using OnlineShop.Code.FileUpload;
 
 namespace Online_Shop.Controllers
 {
@@ -15,6 +16,18 @@ namespace Online_Shop.Controllers
     {
         public ProductController(DatabaseContext DbContext) : base(DbContext)
         {
+        }
+
+        [Route("Product")]
+        public IActionResult Index(int ProductID = 0)
+        {
+            if(ProductID == 0) return NotFound();
+
+            var Product = Db.Products.Where(p => p.ID == ProductID).FirstOrDefault();
+
+            if(Product == null) return NotFound();
+            
+            return View(Product);
         }
 
         public IActionResult Create(int storeID)
@@ -47,18 +60,9 @@ namespace Online_Shop.Controllers
                 {
                     if (formFile.Length > 0)
                     {
-                        using (var stream = new MemoryStream())
-                        {
-                            await formFile.CopyToAsync(stream);
-                            product.Images.Add(new ImageModel(){
-                                Name = formFile.FileName,
-                                Description = formFile.ContentType,
-                                Image = stream.ToArray(),
-                                Product = product,
-                                DateCreated = DateTime.Now
-                            });
-
-                        }
+                        var image = ImageUpload.ImageToByte(formFile);
+                        image.Product = product;
+                        product.Images.Add(image);
                     }
                 }
 
@@ -79,17 +83,9 @@ namespace Online_Shop.Controllers
                     {
                         if (formFile.Length > 0)
                         {
-                            using (var stream = new MemoryStream())
-                            {
-                                await formFile.CopyToAsync(stream);
-                                temp.Images.Add(new ImageModel(){
-                                    Name = formFile.FileName,
-                                    Description = formFile.ContentType,
-                                    Image = stream.ToArray(),
-                                    Variant = temp,
-                                    DateCreated = DateTime.Now
-                                });
-                            }
+                            var image = ImageUpload.ImageToByte(formFile);
+                            image.Variant = temp;
+                            temp.Images.Add(image);
                         }
                     }
 
@@ -107,10 +103,11 @@ namespace Online_Shop.Controllers
             return RedirectToAction("List");
         }
 
-        [Route("Product")]
+        [Route("Products")]
         public IActionResult List(int? storeID)
         {
-            var Products = (storeID.HasValue) ? Db.Products.Where(p => p.StoreID == storeID).ToList() : Db.Products.ToList();
+            var Products = (storeID.HasValue) ? 
+                Db.Products.Where(p => p.StoreID == storeID).ToList() : Db.Products.ToList();
 
             var productview = new ListProductViewModel()
             {

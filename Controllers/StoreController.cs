@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Online_Shop.Models;
 using Online_Shop.ViewModels;
+using OnlineShop.Code.FileUpload;
 
 namespace Online_Shop.Controllers
 {
@@ -12,6 +14,18 @@ namespace Online_Shop.Controllers
     {
         public StoreController(DatabaseContext DbContext) : base(DbContext)
         {
+        }
+
+        [Route("Store")]
+        public IActionResult Index(int StoreID = 0)
+        {
+            if(StoreID == 0) return NotFound();
+
+            var Store = Db.Stores.Where(s => s.ID == StoreID).FirstOrDefault();
+
+            if(Store == null) return NotFound();
+            
+            return View(Store);
         }
 
         public IActionResult Create() => View();
@@ -24,16 +38,28 @@ namespace Online_Shop.Controllers
             var store = new StoreModel(){
                 Name = model.Name,
                 Description = model.Description,
-                DateCreated = DateTime.Now
+                DateCreated = DateTime.Now,
+                Images = new List<ImageModel>()
             };
 
+            foreach (var formFile in model.Images)
+            {
+                if (formFile.Length > 0)
+                {
+                    var image = ImageUpload.ImageToByte(formFile);
+                    image.Store = store;
+                    store.Images.Add(image);
+                }
+            }
+
+            await Db.Images.AddRangeAsync(store.Images);
             await Db.Stores.AddAsync(store);
             await Db.SaveChangesAsync();
 
             return RedirectToAction("List");
         }
 
-        [Route("Store")]
+        [Route("Stores")]
         public IActionResult List()
         {
             var stores = Db.Stores.ToList();

@@ -285,3 +285,7 @@ body {
 ul li, ol li {
     color: #FFFFFF;
 }
+
+.carousel-item>img {
+    height: 300px !important;
+}

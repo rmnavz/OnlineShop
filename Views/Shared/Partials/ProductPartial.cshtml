@@ -2,11 +2,55 @@
 
     <div class="col-12 col-sm-12 col-md-4 col-lg-4">
         <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">@Model.Name</h4>
+            <div id="StoreImages@(Model.ID)" class="carousel slide card-img-top" data-ride="carousel">
+                @if(@Model.Images != null && @Model.Images.Count() > 0)
+                {
+                    <ol class="carousel-indicators">
+                        @for(int ctr = 0; ctr < @Model.Images.Count(); ctr++)
+                        {
+                            <li data-target="#StoreImages@(Model.ID)" data-slide-to="@(ctr)" class="@(ctr == 0)active : '';"></li>
+                        }
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        @{ int c = 0; }
+                        @foreach(var image in Model.Images )
+                        {
+                            var base64 = Convert.ToBase64String(image.Image);
+                            var imgSrc = String.Format("data:{0};base64,{1}",image.ContentType ,base64);
+                            <div class="carousel-item @(@c == 0 ? "active" : "")">
+                                <img class="d-block w-100" src="@imgSrc" alt="@image.Name">
+                            </div>
+                            c++;
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="~/images/StockImage.png" alt="Third slide">
+                        </div>
+                    </div>
+                }
             </div>
             <div class="card-body">
-                @Model.Description
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="card-title">@Model.Name</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p>@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-12">
+                        <a class="btn btn-default" asp-controller="Product" asp-action="Index" asp-route-productID="@Model.ID">View Product</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

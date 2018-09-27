@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OnlineShop;
 
 namespace Online_Shop
 {
@@ -32,11 +33,22 @@ namespace Online_Shop
                 // Add ApplicationDbContext to DI
                 if(Environment.IsProduction()){
                     services.AddDbContext<DatabaseContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
+                        options
+                        .UseLazyLoadingProxies()
+                        .UseSqlServer(Configuration.GetConnectionString("ProductionConnection")));
                 }
                 else if(Environment.IsDevelopment()){
                     services.AddDbContext<DatabaseContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("DevelopmentConnection")));
+                        options
+                        .UseLazyLoadingProxies()
+                        .UseSqlServer(Configuration.GetConnectionString("MyWindowsHostingConnection")));
+                }
+                else if(Environment.IsStaging())
+                {
+                    services.AddDbContext<DatabaseContext>(options =>
+                        options
+                        .UseLazyLoadingProxies()
+                        .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
                 }
                 
             #endregion
@@ -60,6 +72,7 @@ namespace Online_Shop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            Globals.environment = Environment;
 
             if (Environment.IsDevelopment())
             {
@@ -79,6 +92,10 @@ namespace Online_Shop
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "setup",
+                    template: "{controller=Home}/{action=ApplicationSetup}");
             });
         }
     }

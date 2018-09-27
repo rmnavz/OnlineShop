@@ -1,0 +1,20 @@
+@model List<SearchModel>
+@foreach(var result in @Model)
+{
+    @if(result.Product != null)
+    {
+        <div class="row">
+            <div class="col-12">
+                @result.Product.Name
+            </div>
+        </div>
+    }
+    else if(result.Store != null)
+    {
+        <div class="row">
+            <div class="col-12">
+                @result.Store.Name
+            </div>
+        </div>
+    }
+}

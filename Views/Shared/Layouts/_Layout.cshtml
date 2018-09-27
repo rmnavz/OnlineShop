@@ -86,12 +86,12 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i class="fas fa-times"></i>
                     </button>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-body searchResult">
                     </div>
                 </div>
                 </div>
@@ -118,7 +118,12 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
+    <script type="text/javascript">
+        $("#inlineFormInputGroup").on("input", function() {
+            var Value = $(this).val();
+            $(".searchResult").load("/Search?searchString=" + Value);
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -11,34 +11,34 @@
         </ul>
         @if(User.IsInRole(AccountRoles.Seller.ToString())) {
             <ul class="nav">
-                <li class="active ">
-                    <a asp-controller="Store" ><i class="fas fa-store"></i><p>Store</p></a>
+                <li class="">
+                    <a asp-controller="Store" asp-action="List" ><i class="fas fa-store"></i><p>Store</p></a>
                 </li>
             </ul>
         }
         else if(User.IsInRole(AccountRoles.Customer.ToString()))
         {
             <ul class="nav">
-                <li class="active ">
-                    <a asp-controller="Store" ><i class="fas fa-store"></i><p>Stores</p></a>
+                <li class=" ">
+                    <a asp-controller="Store" asp-action="List" ><i class="fas fa-store"></i><p>Stores</p></a>
                 </li>
             </ul>
             <ul class="nav">
-                <li class="active ">
-                    <a asp-controller="Products" ><i class="fas fa-box-open"></i><p>Products</p></a>
+                <li class=" ">
+                    <a asp-controller="Product" asp-action="List"><i class="fas fa-box-open"></i><p>Products</p></a>
                 </li>
             </ul>
         }
         else
         {
             <ul class="nav">
-                <li class="active ">
-                    <a asp-controller="Store" ><i class="fas fa-store"></i><p>Stores</p></a>
+                <li class=" ">
+                    <a asp-controller="Store" asp-action="List" ><i class="fas fa-store"></i><p>Stores</p></a>
                 </li>
             </ul>
             <ul class="nav">
-                <li class="active ">
-                    <a asp-controller="Products" ><i class="fas fa-box-open"></i><p>Products</p></a>
+                <li class=" ">
+                    <a asp-controller="Product" asp-action="List" ><i class="fas fa-box-open"></i><p>Products</p></a>
                 </li>
             </ul>
         }

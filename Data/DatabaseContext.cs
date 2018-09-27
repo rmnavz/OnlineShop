@@ -28,6 +28,7 @@ namespace Online_Shop
             public DbSet<ProductModel> Products { get; set; }
             public DbSet<VariantModel> Variants { get; set; }
             public DbSet<CategoryModel> Categories { get; set; }
+            public DbSet<ReviewModel> Reviews { get; set; }
 
             
             public DbSet<CartModel> Carts { get; set; }
@@ -76,11 +77,10 @@ namespace Online_Shop
                     .HasMany<ProductModel>(s => s.Products)
                     .WithOne(s => s.Store)
                     .HasForeignKey(p => p.StoreID);
-
+                
                 modelBuilder.Entity<StoreModel>()
-                    .HasOne(s => s.Image)
-                    .WithOne(i => i.Store)
-                    .HasForeignKey<StoreModel>(s => s.ImageID);
+                    .HasMany<ImageModel>(s => s.Images)
+                    .WithOne(i => i.Store);
 
                 //Products
                 modelBuilder.Entity<ProductModel>()
@@ -91,6 +91,32 @@ namespace Online_Shop
                     .HasMany<VariantModel>(p => p.Variants)
                     .WithOne(v => v.Product)
                     .HasForeignKey(v => v.ProductID);
+
+                //Reviews
+                modelBuilder.Entity<ReviewModel>()
+                    .HasOne<ProductModel>(r => r.Product)
+                    .WithMany(p => p.Reviews);
+                
+                modelBuilder.Entity<ReviewModel>()
+                    .HasOne<StoreModel>(r => r.Store)
+                    .WithMany(p => p.Reviews);
+                
+                modelBuilder.Entity<ReviewModel>()
+                    .HasOne<AccountModel>(r => r.Account)
+                    .WithMany(a => a.Reviews);
+
+                //Views
+                modelBuilder.Entity<ViewCountModel>()
+                    .HasOne<ProductModel>(r => r.Product)
+                    .WithMany(p => p.ViewCounts);
+                
+                modelBuilder.Entity<ViewCountModel>()
+                    .HasOne<StoreModel>(r => r.Store)
+                    .WithMany(p => p.ViewCounts);
+                
+                modelBuilder.Entity<ViewCountModel>()
+                    .HasOne<AccountModel>(r => r.Account)
+                    .WithMany(a => a.ViewCounts);
 
                 //Producttore and Seller Relationship
                 modelBuilder.Entity<ProductCategoryModel>()
@@ -107,6 +133,10 @@ namespace Online_Shop
                     .HasForeignKey(pc => pc.CategoryID);
 
                 //Variants
+                modelBuilder.Entity<VariantModel>()
+                    .Property(v => v.Price)
+                    .HasColumnType("decimal(18,2)");
+
                 modelBuilder.Entity<VariantModel>()
                     .HasMany<ImageModel>(v => v.Images)
                     .WithOne(i => i.Variant);

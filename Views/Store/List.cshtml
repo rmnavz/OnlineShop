@@ -1,5 +1,9 @@
 @model ICollection<StoreModel>
-<a class="btn btn-primary" asp-controller="Store" asp-action="Create">Create new store</a>
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-primary" asp-controller="Store" asp-action="Create">Create new store</a>
+    </div>
+</div>
 
 <div class="row">
     @foreach( var store in Model)

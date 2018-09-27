@@ -1,5 +1,9 @@
 @model ListProductViewModel
-<a class="btn btn-primary" asp-controller="Product" asp-action="Create" asp-route-storeID="Model.StoreID">Create new product</a>
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-primary" asp-controller="Product" asp-action="Create" asp-route-storeID="Model.StoreID">Create new product</a>
+    </div>
+</div>
 
 <div class="row">
     @foreach( var product in Model.Products)

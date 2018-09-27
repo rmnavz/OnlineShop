@@ -8,12 +8,13 @@ namespace Online_Shop.Models
         [Key] 
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string ContentType { get; set; }
         public byte[] Image { get; set; }
+        public string FileLocation { get; set; }
         public DateTime DateCreated { get; set; }
 
-        public ProductModel Product { get; set; }
-        public VariantModel Variant { get; set; }
-        public StoreModel Store { get; set; }
+        public virtual ProductModel Product { get; set; }
+        public virtual VariantModel Variant { get; set; }
+        public virtual StoreModel Store { get; set; }
     }
 }

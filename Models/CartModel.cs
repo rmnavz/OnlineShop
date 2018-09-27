@@ -13,9 +13,9 @@ namespace Online_Shop.Models
         public DateTime DateCreated { get; set; }
 
         public int CustomerID { get; set; }
-        public CustomerModel Customer { get; set; }
+        public virtual CustomerModel Customer { get; set; }
 
-        public ICollection<OrderModel> Orders { get; set; }
+        public virtual ICollection<OrderModel> Orders { get; set; }
     }
 
     public class OrderModel
@@ -27,9 +27,9 @@ namespace Online_Shop.Models
         public DateTime DateCreated { get; set; }
 
         public int VariantID { get; set; }
-        public VariantModel Variant { get; set; }
+        public virtual VariantModel Variant { get; set; }
         public Guid CartID { get; set; }
-        public CartModel Cart { get; set; }
+        public virtual CartModel Cart { get; set; }
     }
 
     #region enum

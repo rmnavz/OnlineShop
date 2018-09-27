@@ -16,12 +16,14 @@ namespace Online_Shop.Models
         public ProductStatus Status { get; set; }
 
         public int StoreID { get; set; }
-        public StoreModel Store { get; set; }
+        public virtual StoreModel Store { get; set; }
 
-        public ICollection<ImageModel> Images { get; set; }
-        public ICollection<VariantModel> Variants { get; set; }
+        public virtual ICollection<ImageModel> Images { get; set; }
+        public virtual ICollection<VariantModel> Variants { get; set; }
+        public virtual ICollection<ReviewModel> Reviews { get; set; }
+        public virtual ICollection<ViewCountModel> ViewCounts { get; set; }
         
-        public ICollection<ProductCategoryModel> ProductCategory { get; set; }
+        public virtual ICollection<ProductCategoryModel> ProductCategory { get; set; }
     }
 
     public class VariantModel
@@ -36,10 +38,10 @@ namespace Online_Shop.Models
         public DateTime DateCreated { get; set; }
 
         public int ProductID { get; set; }
-        public ProductModel Product { get; set; }
+        public virtual ProductModel Product { get; set; }
 
-        public ICollection<ImageModel> Images { get; set; }
-        public ICollection<OrderModel> Orders { get; set; }
+        public virtual ICollection<ImageModel> Images { get; set; }
+        public virtual ICollection<OrderModel> Orders { get; set; }
 
         public string TwoLetterISOLanguageName
         {
@@ -53,16 +55,16 @@ namespace Online_Shop.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Definition { get; set; }
-        public ICollection<ProductCategoryModel> ProductCategory { get; set; }
+        public virtual ICollection<ProductCategoryModel> ProductCategory { get; set; }
         public DateTime DateCreated { get; set; }
     }
 
     public class ProductCategoryModel
     {
         public int ProductID { get; set; }
-        public ProductModel Product { get; set; }
+        public virtual ProductModel Product { get; set; }
         public int CategoryID { get; set; }
-        public CategoryModel Category { get; set; }
+        public virtual CategoryModel Category { get; set; }
     }
 
     #region enum

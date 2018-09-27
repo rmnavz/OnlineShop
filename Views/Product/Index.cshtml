@@ -1,0 +1,75 @@
+@model ProductModel
+
+<div class="row">
+    <div class="col-12 col-sm-6 col-lg-6 order-md-2">
+        <div class="card">
+            <div id="ProductImages@(Model.ID)" class="carousel slide card-img-top" data-ride="carousel">
+                @if(@Model.Images != null && @Model.Images.Count() > 0)
+                {
+                    <ol class="carousel-indicators">
+                        @for(int ctr = 0; ctr < @Model.Images.Count(); ctr++)
+                        {
+                            <li data-target="#ProductImages@(Model.ID)" data-slide-to="@(ctr)" class="@(ctr == 0)active : '';"></li>
+                        }
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        @{ int c = 0; }
+                        @foreach(var image in Model.Images )
+                        {
+                            var base64 = Convert.ToBase64String(image.Image);
+                            var imgSrc = String.Format("data:{0};base64,{1}",image.ContentType ,base64);
+                            <div class="carousel-item @(@c == 0 ? "active" : "")">
+                                <img class="d-block w-100" src="@imgSrc" alt="@image.Name">
+                            </div>
+                            c++;
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="~/images/StockImage.png" alt="Third slide">
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 col-lg-6">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">@Model.Name</h4>
+                        <p class="card-subtitle">By: @Model.Store.Name</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-subtitle">Product Description</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@Model.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Title</h4>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Text</p>
+            </div>
+        </div>
+    </div>
+</div>

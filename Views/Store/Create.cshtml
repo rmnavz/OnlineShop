@@ -7,7 +7,16 @@
                 <h4 class="card-title">Create new store</h4>
             </div>
             <div class="card-body">
-                <form asp-controller="Store" asp-action="Create" method="POST" class="" role="form">
+                <form asp-controller="Store" asp-action="Create" method="POST" enctype="multipart/form-data" role="form">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Images</label>
+                                <input asp-for="Images" class="form-control" />
+                                <span asp-validation-for="Images"></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
