@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using OnlineShop.Code.RestSharp.CurrencyConverterApi;
 
 namespace Online_Shop.Models
 {
@@ -24,6 +25,19 @@ namespace Online_Shop.Models
         public virtual ICollection<ViewCountModel> ViewCounts { get; set; }
         
         public virtual ICollection<ProductCategoryModel> ProductCategory { get; set; }
+
+        public void ConvertProductPrice()
+        {
+            var converter = new FreeCurrencyConverterApi();
+            
+            foreach(var Variant in Variants)
+            {
+                ConvertResult result = converter.GetExchangeRate(Variant.Currency);
+                Variant.Price = Variant.Price * Math.Round(result.val, 2);
+                Variant.Currency = CultureInfo.CurrentCulture;
+            }
+
+        }
     }
 
     public class VariantModel
@@ -45,7 +59,7 @@ namespace Online_Shop.Models
 
         public string TwoLetterISOLanguageName
         {
-            get { return Currency == null ? null : Currency.TwoLetterISOLanguageName; }
+            get { return Currency == null ? null : Currency.Name; }
             set { Currency = CultureInfo.GetCultureInfo(value); }
         }
     }

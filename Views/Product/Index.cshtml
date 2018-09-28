@@ -65,7 +65,29 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Title</h4>
+                <h4 class="card-title">Price</h4>
+            </div>
+            <div class="card-body">
+                @foreach(var variant in Model.Variants)
+                {
+                    <div class="row">
+                        <div class="col-6">
+                            @variant.Description
+                        </div>
+                        <div class="col-6">
+                            @variant.Price.ToString("C",variant.Currency)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Reviews</h4>
             </div>
             <div class="card-body">
                 <p class="card-text">Text</p>

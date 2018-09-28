@@ -26,6 +26,8 @@ namespace Online_Shop.Controllers
             var Product = Db.Products.Where(p => p.ID == ProductID).FirstOrDefault();
 
             if(Product == null) return NotFound();
+
+            Product.ConvertProductPrice();
             
             return View(Product);
         }
@@ -76,7 +78,8 @@ namespace Online_Shop.Controllers
                         Stock = variant.Stock,
                         Price = variant.Price,
                         Currency = CultureInfo.CurrentCulture,
-                        Images = new List<ImageModel>()
+                        Images = new List<ImageModel>(),
+                        DateCreated = DateTime.Now
                     };
 
                     foreach (var formFile in variant.Images)
