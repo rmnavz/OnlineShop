@@ -1,0 +1,30 @@
+@model ProductViewModel
+<div class="modal fade" id="AddCartModal" tabindex="-1" role="dialog" aria-labelledby="AddCartTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <form asp-action="Cart" asp-action="Add" asp-route-productID="@Model.Product.ID"></form>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="AddCartTitle">@Model.Product.Name</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <select asp-for="VariantID"  class="form-control" asp-items="@(new SelectList(Model.Product.Variants,"ID","Description"))">
+                            <option>Please select one</option>
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <input class="form-control" asp-for="Quantity" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+</div>

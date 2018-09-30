@@ -30,4 +30,11 @@ namespace Online_Shop.ViewModels
         public ICollection<ProductModel> Products { get; set; }
         public int? StoreID { get; set; }
     }
+
+    public class ProductViewModel
+    {
+        public ProductModel Product { get; set; }
+        public int VariantID { get; set; }
+        public int Quantity { get; set; }
+    }
 }

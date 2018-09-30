@@ -1,20 +1,20 @@
-@model ProductModel
+@model ProductViewModel
 
 <div class="row">
     <div class="col-12 col-sm-6 col-lg-6 order-md-2">
         <div class="card">
-            <div id="ProductImages@(Model.ID)" class="carousel slide card-img-top" data-ride="carousel">
-                @if(@Model.Images != null && @Model.Images.Count() > 0)
+            <div id="ProductImages@(Model.Product.ID)" class="carousel slide card-img-top" data-ride="carousel">
+                @if(@Model.Product.Images != null && @Model.Product.Images.Count() > 0)
                 {
                     <ol class="carousel-indicators">
-                        @for(int ctr = 0; ctr < @Model.Images.Count(); ctr++)
+                        @for(int ctr = 0; ctr < @Model.Product.Images.Count(); ctr++)
                         {
-                            <li data-target="#ProductImages@(Model.ID)" data-slide-to="@(ctr)" class="@(ctr == 0)active : '';"></li>
+                            <li data-target="#ProductImages@(Model.Product.ID)" data-slide-to="@(ctr)" class="@(ctr == 0)active : '';"></li>
                         }
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         @{ int c = 0; }
-                        @foreach(var image in Model.Images )
+                        @foreach(var image in Model.Product.Images )
                         {
                             var base64 = Convert.ToBase64String(image.Image);
                             var imgSrc = String.Format("data:{0};base64,{1}",image.ContentType ,base64);
@@ -41,8 +41,8 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">@Model.Name</h4>
-                        <p class="card-subtitle">By: @Model.Store.Name</p>
+                        <h4 class="card-title">@Model.Product.Name</h4>
+                        <p class="card-subtitle">By: @Model.Product.Store.Name</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         <h4 class="card-subtitle">Product Description</h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text">@Model.Description</p>
+                        <p class="card-text">@Model.Product.Description</p>
                     </div>
                 </div>
             </div>
@@ -65,19 +65,55 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Price</h4>
+                <h4 class="card-title">Variants</h4>
             </div>
             <div class="card-body">
-                @foreach(var variant in Model.Variants)
-                {
-                    <div class="row">
-                        <div class="col-6">
-                            @variant.Description
+                <div class="row">
+                        <div class="col-3">
+                            <p>Description</p>
                         </div>
-                        <div class="col-6">
-                            @variant.Price.ToString("C",variant.Currency)
+                        <div class="col-3">
+                            <p>Price</p>
+                        </div>
+                        <div class="col-3">
+                            <p>Quantity</p>
+                        </div>
+                        <div class="col-3">
+                            
                         </div>
                     </div>
+                @foreach(var variant in Model.Product.Variants)
+                {
+                    <div class="row">
+                        <div class="col-12">
+                            @{Model.VariantID = variant.ID;}
+                            <form class="row" asp-controller="Cart" asp-action="Add" method="POST" role="form">
+                                    @Html.HiddenFor(m => m.VariantID)
+                                <div class="col-3">
+                                    @variant.Description
+                                </div>
+                                <div class="col-3">
+                                    @variant.Price.ToString("C",variant.Currency)
+                                </div>
+                                @if(variant.Stock > 0)
+                                {
+                                        <div class="col-3">
+                                            <input asp-for="Quantity" min="1" max="@variant.Stock" class="form-control"> 
+                                        </div>
+                                        <div class="col-3">
+                                            <button type="submit" class="btn btn-default">Add to Cart</button>
+                                        </div>
+                                }
+                                else
+                                {
+                                    <div class="col-6">
+                                        Out of Stock
+                                    </div>
+                                }
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row"></div>
                 }
             </div>
         </div>
@@ -95,3 +131,5 @@
         </div>
     </div>
 </div>
+
+<partial name="Partials/AddCartModal", for="@Model" />

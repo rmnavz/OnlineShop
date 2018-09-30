@@ -29,7 +29,7 @@ namespace Online_Shop.Controllers
 
             Product.ConvertProductPrice();
             
-            return View(Product);
+            return View(new ProductViewModel() { Product = Product});
         }
 
         public IActionResult Create(int storeID)
