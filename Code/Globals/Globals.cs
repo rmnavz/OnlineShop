@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 
-namespace OnlineShop
+namespace Online_Shop
 {
     public static class Globals
     {

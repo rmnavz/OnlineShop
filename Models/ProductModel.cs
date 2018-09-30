@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
-using OnlineShop.Code.RestSharp.CurrencyConverterApi;
+using Online_Shop.Code.RestSharp.CurrencyConverterApi;
 
 namespace Online_Shop.Models
 {
@@ -33,7 +33,7 @@ namespace Online_Shop.Models
             foreach(var Variant in Variants)
             {
                 ConvertResult result = converter.GetExchangeRate(Variant.Currency);
-                Variant.Price = Variant.Price * Math.Round(result.val, 2);
+                Variant.Price = Variant.Price * result.val;
                 Variant.Currency = CultureInfo.CurrentCulture;
             }
 

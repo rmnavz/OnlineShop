@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Online_Shop.Models;
 using Online_Shop.ViewModels;
-using OnlineShop.Code.FileUpload;
+using Online_Shop.Code.FileUpload;
 
 namespace Online_Shop.Controllers
 {

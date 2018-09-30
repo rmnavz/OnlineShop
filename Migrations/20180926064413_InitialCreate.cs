@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OnlineShop.Migrations
+namespace Online_Shop.Migrations
 {
     public partial class InitialCreate : Migration
     {

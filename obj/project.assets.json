@@ -13956,28 +13956,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TAGI\\.nuget\\packages\\": {},
+    "C:\\Users\\migzn\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\TAGI\\Documents\\VSCode\\OnlineShop\\Online Shop.csproj",
+      "projectUniqueName": "C:\\Users\\migzn\\Documents\\VSCode\\Net Core\\Online Shop\\Online Shop.csproj",
       "projectName": "Online Shop",
-      "projectPath": "C:\\Users\\TAGI\\Documents\\VSCode\\OnlineShop\\Online Shop.csproj",
-      "packagesPath": "C:\\Users\\TAGI\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\TAGI\\Documents\\VSCode\\OnlineShop\\obj\\",
+      "projectPath": "C:\\Users\\migzn\\Documents\\VSCode\\Net Core\\Online Shop\\Online Shop.csproj",
+      "packagesPath": "C:\\Users\\migzn\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\migzn\\Documents\\VSCode\\Net Core\\Online Shop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\TAGI\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\migzn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

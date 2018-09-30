@@ -20,6 +20,7 @@ namespace Online_Shop
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseUrls(new string[] {"http://localhost:5000", "https://localhost:5050"})
                 .Build();
     }
 }

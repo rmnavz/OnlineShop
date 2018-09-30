@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Online_Shop;
 
-namespace OnlineShop.Migrations
+namespace Online_Shop.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20180926094108_UpdateDatabase09262018")]

@@ -3,7 +3,7 @@ using System.Globalization;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 
-namespace OnlineShop.Code.RestSharp.CurrencyConverterApi
+namespace Online_Shop.Code.RestSharp.CurrencyConverterApi
 {
     public class FreeCurrencyConverterApi
     {

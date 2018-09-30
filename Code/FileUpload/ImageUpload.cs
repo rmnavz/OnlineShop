@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Online_Shop.Models;
 
-namespace OnlineShop.Code.FileUpload
+namespace Online_Shop.Code.FileUpload
 {
     public class ImageUpload
     {

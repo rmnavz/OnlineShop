@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace OnlineShop.Migrations
+namespace Online_Shop.Migrations
 {
     public partial class UpdateDatabase09262018 : Migration
     {
